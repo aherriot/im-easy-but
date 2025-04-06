@@ -1,4 +1,4 @@
-import data from "./world";
+import data from "./us";
 
 const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 
@@ -40,7 +40,7 @@ async function main() {
     const { city, region } = data[i];
     const geoId = await getGeoId(city, region);
     console.log(`{city: "${city}", region: "${region}", geoId: ${geoId}},`);
-    sleep(200);
+    sleep(10);
   }
 }
 
