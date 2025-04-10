@@ -1,17 +1,10 @@
 "use client";
 
 import { id } from "@instantdb/react";
-import { redirect } from "next/navigation";
 import { use } from "react";
 
 import { CUISINES, PRICES, RESTRICTIONS } from "@/utils/constants";
 import db from "@/utils/db";
-
-// async function fetchGroup(id: string) {
-//   const res = await fetch("https://...");
-//   if (!res.ok) return undefined;
-//   return res.json();
-// }
 
 async function toggleCuisine(groupId: string, name: string) {
   console.log("toggleCuisine", groupId, name);
@@ -29,9 +22,6 @@ async function toggleCuisine(groupId: string, name: string) {
 
 export default function Group({ params }: { params: Promise<{ id: string }> }) {
   const { id } = use(params);
-  if (!id) {
-    redirect("/login");
-  }
 
   const { isLoading, error, data } = db.useQuery({
     groups: {
@@ -48,15 +38,10 @@ export default function Group({ params }: { params: Promise<{ id: string }> }) {
   if (error) return <div>Error fetching data: {error.message}</div>;
 
   const { groups } = data;
-  console.log(groups);
   if (!groups || groups.length !== 1) {
     return <div>Group not found</div>;
   }
   const group = groups[0];
-
-  //   if (!team) {
-  //     redirect("/join");
-  //   }
 
   return (
     <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
@@ -108,6 +93,4 @@ export default function Group({ params }: { params: Promise<{ id: string }> }) {
       </main>
     </div>
   );
-
-  // ...
 }
