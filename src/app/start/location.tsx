@@ -1,22 +1,29 @@
 import { useState } from "react";
+import { redirect } from "next/navigation";
+import { id } from "@instantdb/react";
 
-import locations from "@/data/canada";
 import { Button } from "@/components/ui/button";
 import db from "@/utils/db";
-import { id } from "@instantdb/react";
-import { redirect } from "next/navigation";
+import type { Geo } from "@/types";
+import GEOS from "@/data/canada";
 
 type LocationProps = {
   name: string;
   setScreen: (screen: "start" | "location") => void;
 };
 
-async function createGroup(name: string) {
+async function createGroup(name: string, geoId: string) {
+  const localId = await db.getLocalId("guest");
+  if (!localId) {
+    throw new Error("No local ID found");
+  }
   const newGroupId = id();
   await db.transact(
     db.tx.groups[newGroupId].update({
       name,
       createdAt: JSON.stringify(new Date()),
+      ownerId: localId,
+      geoId,
     })
   );
 
@@ -24,45 +31,36 @@ async function createGroup(name: string) {
 }
 
 export default function Location({ setScreen, name }: LocationProps) {
-  const [location, setLocation] = useState<string>("");
+  const [geoId, setGeoId] = useState<string>("");
+
+  const selectedGeo: Geo | undefined = GEOS.find(
+    (location) => location.id === geoId
+  );
 
   return (
     <div className="flex flex-col gap-4 row-start-2 items-center sm:items-start">
-      <h1 className="text-4xl font-bold">{location}</h1>
+      <h1>{name}, where do you want to find a restaurant?</h1>
+      <h1 className="text-4xl font-bold">
+        {selectedGeo?.city}, {selectedGeo?.region}
+      </h1>
       <select
-        value={location}
-        onChange={(e) => setLocation(e.target.value)}
+        value={geoId}
+        onChange={(e) => setGeoId(e.target.value)}
         autoFocus
       >
         <option value="" disabled>
           Select your location
         </option>
-        {locations.map((location) => (
-          <option key={location.geoId} value={location.city}>
+        {GEOS.sort((a, b) => a.city.localeCompare(b.city)).map((location) => (
+          <option key={location.id} value={location.id}>
             {location.city}, {location.region}
           </option>
         ))}
       </select>
       <Button onClick={() => setScreen("start")}>back</Button>
-      <Button onClick={() => createGroup(name)} disabled={!location}>
+      <Button onClick={() => createGroup(name, geoId)} disabled={!location}>
         Jump in
       </Button>
     </div>
   );
 }
-
-/*
-      <Command value={location} onValueChange={setLocation}>
-        <CommandInput placeholder="Search for a city..." />
-        <CommandList>
-          <CommandEmpty>No results found.</CommandEmpty>
-          <CommandGroup heading="Suggestions">
-            {locations.map((location) => (
-              <CommandItem key={location.geoId} value={location.city}>
-                {location.city}, {location.region}
-              </CommandItem>
-            ))}
-          </CommandGroup>
-        </CommandList>
-      </Command>
-      */
