@@ -20,7 +20,7 @@ export default function Name({ setScreen, name, setName }: NameProps) {
         className="border border-gray-300 rounded-md p-2"
         autoFocus
       />
-      <Button size="lg" onClick={() => setScreen("location")} disabled={!name}>
+      <Button onClick={() => setScreen("location")} disabled={!name}>
         Get Started
       </Button>
     </main>

@@ -18,7 +18,7 @@ export default function Name({ setScreen, name, setName }: NameProps) {
         onChange={(e) => setName(e.target.value)}
         autoFocus
       />
-      <Button size="lg" onClick={() => setScreen("cuisine")} disabled={!name}>
+      <Button onClick={() => setScreen("cuisine")} disabled={!name}>
         Get Started
       </Button>
     </main>

@@ -4,7 +4,6 @@ import { id } from "@instantdb/react";
 
 import { Button } from "@/components/ui/button";
 import db from "@/utils/db";
-import type { Geo } from "@/types";
 import GEOS from "@/data/canada";
 
 type LocationProps = {
@@ -32,10 +31,6 @@ async function createGroup(name: string, geoId: string) {
 
 export default function Location({ setScreen, name }: LocationProps) {
   const [geoId, setGeoId] = useState<string>("");
-
-  const selectedGeo: Geo | undefined = GEOS.find(
-    (location) => location.id === geoId
-  );
 
   return (
     <div className="flex flex-col gap-4 row-start-2 items-center sm:items-start">
