@@ -1,6 +1,5 @@
 "use client";
 
-import Header from "@/components/ui/header";
 import Link from "next/link";
 import { useState, useEffect } from "react";
 
