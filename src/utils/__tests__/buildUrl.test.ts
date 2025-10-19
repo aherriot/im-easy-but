@@ -15,7 +15,7 @@ describe("buildUrl", () => {
     );
   });
 
-  it("should include dietary IDs in the URL", () => {
+  it("should include diet IDs in the URL", () => {
     const url = buildUrl("12345", [], ["10665", "10697"], []);
     expect(url).toBe(
       "https://www.tripadvisor.com/FindRestaurants?geo=12345&establishmentTypes=10591&broadened=false&diets=10665%2C10697"

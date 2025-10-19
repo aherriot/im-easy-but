@@ -2,7 +2,7 @@
  * Builds a TripAdvisor restaurant search URL.
  * @param geoId The geographical ID for the search.
  * @param cuisineIdsArray An array of cuisine IDs to filter by.
- * @param dietaryIdsArray An array of dietary preference IDs to filter by.
+ * @param dietIdsArray An array of dietary preference IDs to filter by.
  * @param priceIdsArray An array of price range IDs to filter by.
  * @returns The constructed URL as a string.
  */
@@ -10,7 +10,7 @@
 export default function buildUrl(
   geoId: string,
   cuisineIdsArray: string[],
-  dietaryIdsArray: string[],
+  dietIdsArray: string[],
   priceIdsArray: string[]
 ): string {
   const url = new URL(`https://www.tripadvisor.com/FindRestaurants`);
@@ -22,8 +22,8 @@ export default function buildUrl(
     url.searchParams.append("cuisines", cuisineIdsArray.join(","));
   }
 
-  if (dietaryIdsArray.length > 0) {
-    url.searchParams.append("diets", dietaryIdsArray.join(","));
+  if (dietIdsArray.length > 0) {
+    url.searchParams.append("diets", dietIdsArray.join(","));
   }
 
   if (priceIdsArray.length > 0) {

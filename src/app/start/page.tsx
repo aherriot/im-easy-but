@@ -5,12 +5,13 @@ import { useState } from "react";
 // import { redirect } from "next/navigation";
 import Name from "./name";
 import Location from "./location";
+import useLocalStorageState from "@/hooks/useLocalStorageState";
 
 type Screen = "start" | "location";
 
 export default function Start() {
   const [screen, setScreen] = useState<Screen>("start");
-  const [name, setName] = useState<string>("");
+  const [name, setName] = useLocalStorageState<string>("name", "");
 
   return (
     <div className="min-h-screen max-w-2xl m-auto p-8 gap-16font-[family-name:var(--font-geist-sans)]">

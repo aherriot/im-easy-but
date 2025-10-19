@@ -12,7 +12,7 @@ const _schema = i.schema({
       // The ID of the guest this restriction belongs to
       guestId: i.string(),
       // The type of restriction: cuisine, dietary, or price
-      restrictionType: i.string<"cuisine" | "dietary" | "price">(),
+      restrictionType: i.string<"cuisine" | "diet" | "price">(),
       /**
        * The ID of the entity the restriction applies to.
        * Either a specific cuisine, dietary restriction, or price range

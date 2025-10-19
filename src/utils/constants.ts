@@ -23,7 +23,7 @@ export const CUISINES = [
   // { name: "Brazilian", id: "" },
 ] as const;
 
-export const DIETARY = [
+export const DIETS = [
   { name: "Vegetarian", id: "10665" },
   { name: "Vegan", id: "10697" },
   { name: "Gluten Free", id: "10992" },

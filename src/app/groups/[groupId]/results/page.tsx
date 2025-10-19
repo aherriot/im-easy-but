@@ -51,7 +51,7 @@ export default function Group({
   }
 
   const cuisineIds = new Map<string, Restriction>();
-  const dietaryIds = new Set<string>();
+  const dietIds = new Set<string>();
   const priceIds = new Set<string>();
 
   group.restrictions.map((restriction) => {
@@ -61,22 +61,22 @@ export default function Group({
         restrictionId: restriction.id,
         guestId: restriction.guestId,
       });
-    } else if (restriction.restrictionType === "dietary") {
-      dietaryIds.add(restriction.referenceId);
+    } else if (restriction.restrictionType === "diet") {
+      dietIds.add(restriction.referenceId);
     } else if (restriction.restrictionType === "price") {
       priceIds.add(restriction.referenceId);
     }
   });
 
   // Convert the Set to an array
-  const dietaryIdsArray = Array.from(dietaryIds);
+  const dietIdsArray = Array.from(dietIds);
   const priceIdsArray = Array.from(priceIds);
   const cuisineIdsArray = Array.from(cuisineIds.keys());
 
   const restaurantListUrl = buildUrl(
     geo.id,
     cuisineIdsArray,
-    dietaryIdsArray,
+    dietIdsArray,
     priceIdsArray
   );
 
