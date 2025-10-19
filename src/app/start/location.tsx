@@ -40,9 +40,6 @@ export default function Location({ setScreen, name }: LocationProps) {
   return (
     <div className="flex flex-col gap-4 row-start-2 items-center sm:items-start">
       <h1>{name}, where do you want to find a restaurant?</h1>
-      <h1 className="text-4xl font-bold">
-        {selectedGeo?.city}, {selectedGeo?.region}
-      </h1>
       <select
         value={geoId}
         onChange={(e) => setGeoId(e.target.value)}

@@ -1,15 +1,16 @@
 /**
  * Builds a TripAdvisor restaurant search URL.
  * @param geoId The geographical ID for the search.
- * @param cuisineIdsArray An array of cuisine IDs to filter by.
+ * @param excludedCuisineIdsArray An array of cuisine IDs to filter by.
  * @param dietIdsArray An array of dietary preference IDs to filter by.
  * @param priceIdsArray An array of price range IDs to filter by.
  * @returns The constructed URL as a string.
  */
+import { CUISINES } from "./constants";
 
 export default function buildUrl(
   geoId: string,
-  cuisineIdsArray: string[],
+  excludedCuisineIdsArray: string[],
   dietIdsArray: string[],
   priceIdsArray: string[]
 ): string {
@@ -18,9 +19,15 @@ export default function buildUrl(
   url.searchParams.append("establishmentTypes", "10591");
   url.searchParams.append("broadened", "false");
 
-  if (cuisineIdsArray.length > 0) {
-    url.searchParams.append("cuisines", cuisineIdsArray.join(","));
-  }
+  const cuisineIdsSet = new Set(excludedCuisineIdsArray);
+  const remainingCuisines: string[] = [];
+  CUISINES.forEach((cuisine) => {
+    // if a cuisine is NOT in the excluded list, add it to the URL
+    if (!cuisineIdsSet.has(cuisine.id)) {
+      remainingCuisines.push(cuisine.id);
+    }
+  });
+  url.searchParams.append("cuisines", remainingCuisines.join(","));
 
   if (dietIdsArray.length > 0) {
     url.searchParams.append("diets", dietIdsArray.join(","));
@@ -29,10 +36,6 @@ export default function buildUrl(
   if (priceIdsArray.length > 0) {
     url.searchParams.append("priceTypes", priceIdsArray.join(","));
   }
-  // else {
-  // const priceIds = priceIdsArray.length > 0 ? priceIdsArray : ["10953"];
-
-  // }
 
   return url.toString();
 }

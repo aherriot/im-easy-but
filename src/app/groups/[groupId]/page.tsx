@@ -64,8 +64,6 @@ export default function Groups({
   //   initialData: { name: guestId ?? "" },
   // });
 
-  // console.log("peers", peers);
-
   // useEffect(() => {
   //   publishPresence({ name: "andrew" });
   // }, [guestId, publishPresence]);
@@ -79,9 +77,7 @@ export default function Groups({
           {geo.city}, {geo.region}
         </span>
       </h1>
-      <div>
-        <b>guestId</b> {guestId}
-      </div>
+
       {screen === "name" && (
         <Name setScreen={setScreen} name={name} setName={setName} />
       )}
@@ -96,7 +92,6 @@ export default function Groups({
 
       {screen === "diet" && (
         <Diet
-          setScreen={setScreen}
           guestId={guestId}
           groupId={groupId}
           restrictions={group.restrictions}

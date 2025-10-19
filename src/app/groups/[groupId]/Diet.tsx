@@ -1,20 +1,18 @@
 import Link from "next/link";
 import { DIETS } from "@/utils/constants";
 import toggleRestriction from "../toggleRestriction";
-import { GroupQueryRestrictions, PersonalRestriction, Screen } from "@/types";
+import { GroupQueryRestrictions, PersonalRestriction } from "@/types";
 
 type CuisineProps = {
   guestId: string;
   groupId: string;
   restrictions: GroupQueryRestrictions;
-  setScreen: (screen: Screen) => void;
 };
 
 export default function Cuisine({
   guestId,
   groupId,
   restrictions,
-  setScreen,
 }: CuisineProps) {
   const cuisineIds = new Map<string, PersonalRestriction>();
 
