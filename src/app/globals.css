@@ -2,17 +2,18 @@
 @import "tw-animate-css";
 
 /* ================================
-   PICKY PICKY BRAND SYSTEM
+   TAILWIND V4 THEME CONFIGURATION
+   Define custom colors using @theme inline
    ================================ */
 
-:root {
+@theme {
   /* Primary Brand Colors - Warm Orange/Red inspired by food */
   --color-primary-50: #fef7ed;
   --color-primary-100: #feefd3;
   --color-primary-200: #fedcab;
   --color-primary-300: #fdc373;
   --color-primary-400: #fba54a;
-  --color-primary-500: #f97316; /* Main brand orange */
+  --color-primary-500: #f97316;
   --color-primary-600: #ea5a0c;
   --color-primary-700: #c2410c;
   --color-primary-800: #9a3412;
@@ -25,7 +26,7 @@
   --color-secondary-200: #bbf7d0;
   --color-secondary-300: #86efac;
   --color-secondary-400: #4ade80;
-  --color-secondary-500: #22c55e; /* Main secondary green */
+  --color-secondary-500: #22c55e;
   --color-secondary-600: #16a34a;
   --color-secondary-700: #15803d;
   --color-secondary-800: #166534;
@@ -38,25 +39,25 @@
   --color-accent-200: #e9d5ff;
   --color-accent-300: #d8b4fe;
   --color-accent-400: #c084fc;
-  --color-accent-500: #a855f7; /* Main accent purple */
+  --color-accent-500: #a855f7;
   --color-accent-600: #9333ea;
   --color-accent-700: #7c3aed;
   --color-accent-800: #6b21a8;
   --color-accent-900: #581c87;
   --color-accent-950: #3b0764;
 
-  /* Neutral Colors - Warm grays */
-  --color-neutral-50: #fafaf9;
-  --color-neutral-100: #f5f5f4;
-  --color-neutral-200: #e7e5e4;
-  --color-neutral-300: #d6d3d1;
-  --color-neutral-400: #a8a29e;
+  /* Neutral Colors - Grayscale for backgrounds, borders, text */
+  --color-neutral-50: #0c0a09;
+  --color-neutral-100: #1c1917;
+  --color-neutral-200: #292524;
+  --color-neutral-300: #44403c;
+  --color-neutral-400: #57534e;
   --color-neutral-500: #78716c;
-  --color-neutral-600: #57534e;
-  --color-neutral-700: #44403c;
-  --color-neutral-800: #292524;
-  --color-neutral-900: #1c1917;
-  --color-neutral-950: #0c0a09;
+  --color-neutral-600: #a8a29e;
+  --color-neutral-700: #d6d3d1;
+  --color-neutral-800: #e7e5e4;
+  --color-neutral-900: #f5f5f4;
+  --color-neutral-950: #fafaf9;
 
   /* Semantic Colors */
   --color-success-light: #dcfce7;
@@ -75,6 +76,22 @@
   --color-info: #3b82f6;
   --color-info-dark: #2563eb;
 
+  /* Brand specific shadows with color */
+  --shadow-primary: 0 4px 14px 0 rgb(249 115 22 / 0.15);
+  --shadow-secondary: 0 4px 14px 0 rgb(34 197 94 / 0.15);
+  --shadow-accent: 0 4px 14px 0 rgb(168 85 247 / 0.15);
+
+  /* Animations */
+  --animate-bounce-gentle: bounce-gentle 2s infinite;
+  --animate-slide-up: slide-up 0.4s ease-out;
+  --animate-fade-in: fade-in 0.3s ease-out;
+}
+
+/* ================================
+   I'm Easy, but... BRAND SYSTEM
+   ================================ */
+
+:root {
   /* Typography */
   --font-family-heading:
     "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
@@ -97,11 +114,6 @@
     0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
   --shadow-xl:
     0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
-
-  /* Brand specific shadows with color */
-  --shadow-primary: 0 4px 14px 0 rgb(249 115 22 / 0.15);
-  --shadow-secondary: 0 4px 14px 0 rgb(34 197 94 / 0.15);
-  --shadow-accent: 0 4px 14px 0 rgb(168 85 247 / 0.15);
 }
 
 /* ================================
@@ -391,20 +403,6 @@
 
 /* Dark mode support */
 @media (prefers-color-scheme: dark) {
-  :root {
-    --color-neutral-50: #0c0a09;
-    --color-neutral-100: #1c1917;
-    --color-neutral-200: #292524;
-    --color-neutral-300: #44403c;
-    --color-neutral-400: #57534e;
-    --color-neutral-500: #78716c;
-    --color-neutral-600: #a8a29e;
-    --color-neutral-700: #d6d3d1;
-    --color-neutral-800: #e7e5e4;
-    --color-neutral-900: #f5f5f4;
-    --color-neutral-950: #fafaf9;
-  }
-
   .card {
     background: var(--color-neutral-100);
     border-color: var(--color-neutral-300);
@@ -437,25 +435,4 @@
     padding: 0.625rem 1.25rem;
     font-size: 0.875rem;
   }
-}
-
-/* Food-themed decorative elements */
-.food-emoji::before {
-  content: "🍽️";
-  margin-right: 0.5rem;
-}
-
-.restaurant-emoji::before {
-  content: "🏪";
-  margin-right: 0.5rem;
-}
-
-.star-emoji::before {
-  content: "⭐";
-  margin-right: 0.25rem;
-}
-
-.location-emoji::before {
-  content: "📍";
-  margin-right: 0.5rem;
 }

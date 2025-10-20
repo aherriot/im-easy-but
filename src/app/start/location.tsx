@@ -34,8 +34,11 @@ export default function Location({ setScreen, name }: LocationProps) {
 
   return (
     <div className="flex flex-col gap-4 row-start-2 items-center sm:items-start">
-      <h1>{name}, where do you want to find a restaurant?</h1>
+      <h1 className="text-gray-200 text-xl">
+        {name}, where do you want to find a restaurant?
+      </h1>
       <select
+        className="input"
         value={geoId}
         onChange={(e) => setGeoId(e.target.value)}
         autoFocus
@@ -49,10 +52,14 @@ export default function Location({ setScreen, name }: LocationProps) {
           </option>
         ))}
       </select>
-      <Button onClick={() => setScreen("start")}>back</Button>
-      <Button onClick={() => createGroup(name, geoId)} disabled={!location}>
-        Jump in
-      </Button>
+      <div className="flex gap-4 mt-4">
+        <Button variant="outline" onClick={() => setScreen("start")}>
+          Back
+        </Button>
+        <Button onClick={() => createGroup(name, geoId)} disabled={!location}>
+          Jump in
+        </Button>
+      </div>
     </div>
   );
 }

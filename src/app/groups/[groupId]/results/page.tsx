@@ -8,6 +8,7 @@ import db from "@/utils/db";
 import GEOS from "@/data/canada";
 import { Geo, Restriction } from "@/types";
 import buildUrl from "@/utils/buildUrl";
+import Header from "@/components/ui/header";
 
 export default function Group({
   params,
@@ -81,17 +82,20 @@ export default function Group({
   );
 
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
+    <div className="items-center text-white justify-items-center min-h-screen gap-16  bg-neutral-50">
+      <Header />
       <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
         <h1 className="text-4xl font-bold">Results</h1>
-        <div>
-          <b>guestId</b> {guestId}
-        </div>
 
-        <a href={restaurantListUrl} target="_blank" rel="noreferrer">
-          {restaurantListUrl}
+        <a
+          className="btn-primary"
+          href={restaurantListUrl}
+          target="_blank"
+          rel="noreferrer"
+        >
+          Open Restaurant List
         </a>
-        <Link href={`/groups/${groupId}`}>Back to group</Link>
+        <Link href={`/groups/${groupId}`}>← Back to restrictions</Link>
       </main>
     </div>
   );

@@ -10,17 +10,22 @@ type NameProps = {
 export default function Name({ setScreen, name, setName }: NameProps) {
   return (
     <main className="flex flex-col gap-4 items-center sm:items-start">
-      <h1 className="text-4xl font-bold">Picky Picky</h1>
-      <p>Collaboratively choose a restaurant with friends</p>
+      <h1 className="text-4xl text-gradient-warm font-bold">
+        I&apos;m Easy, but...
+      </h1>
       <Input
+        label="What is your name?"
         type="text"
-        placeholder="Your name"
         value={name}
         onChange={(e) => setName(e.target.value)}
         className="border border-gray-300 rounded-md p-2"
         autoFocus
       />
-      <Button onClick={() => setScreen("location")} disabled={!name}>
+      <Button
+        variant="primary"
+        onClick={() => setScreen("location")}
+        disabled={!name}
+      >
         Get Started
       </Button>
     </main>

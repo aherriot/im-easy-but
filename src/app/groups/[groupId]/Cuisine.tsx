@@ -4,6 +4,7 @@ import { CUISINES } from "@/utils/constants";
 import { GroupQueryRestrictions, PersonalRestriction, Screen } from "@/types";
 import toggleRestriction from "../toggleRestriction";
 import { Button } from "@/components/ui/button";
+import { CheckboxListItem } from "@/components/ui/checkbox-list-item";
 
 type CuisineProps = {
   guestId: string;
@@ -35,37 +36,42 @@ export default function Cuisine({
   });
 
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <h2 className="text-2xl font-bold">What food will you NOT eat?</h2>
-        {CUISINES.map((cuisine) => {
-          const restriction = cuisineIds.get(cuisine.id);
-          return (
-            <div key={cuisine.id} className="flex items-center gap-2">
-              <input
-                type="checkbox"
+    <div className="">
+      <div className="max-w-2xl mx-auto">
+        <h2 className="heading-lg text-primary-300 mb-2">
+          What food will you NOT eat?
+        </h2>
+        {/* Checkbox list with no gaps */}
+        <div className="bg-black shadow-md mb-8">
+          {CUISINES.map((cuisine) => {
+            const restriction = cuisineIds.get(cuisine.id);
+            return (
+              <CheckboxListItem
+                key={cuisine.id}
                 id={cuisine.id}
-                name={cuisine.name}
-                value={cuisine.id}
+                label={cuisine.name}
                 checked={!!restriction}
-                onChange={(e) => {
+                onChange={(isChecked) => {
                   toggleRestriction({
                     groupId,
                     guestId,
                     restrictionType: "cuisine",
                     restrictionId: restriction?.restrictionId ?? "",
-                    referenceId: e.target.value,
-                    isChecked: e.target.checked,
+                    referenceId: cuisine.id,
+                    isChecked,
                   });
                 }}
               />
-              <label htmlFor={cuisine.id}>{cuisine.name}</label>
-            </div>
-          );
-        })}
+            );
+          })}
+        </div>
 
-        <Button onClick={() => setScreen("diet")}>Next</Button>
-      </main>
+        <div className="mb-8 w-full flex justify-center">
+          <Button variant="primary" size="lg" onClick={() => setScreen("diet")}>
+            Next
+          </Button>
+        </div>
+      </div>
     </div>
   );
 }

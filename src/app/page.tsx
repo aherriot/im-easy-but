@@ -30,25 +30,30 @@ export default function Home() {
   }, [excuses.length]);
 
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <div className="text-center sm:text-left">
-          <h1 className="text-4xl font-bold">I&apos;m easy, but...</h1>
-          <p className="text-2xl text-gray-600 mt-2 min-h-[2.5rem] transition-opacity duration-300">
-            {excuses[currentExcuseIndex]}
+    <div className="min-h-screen bg-neutral-50 flex items-center justify-center p-6 mt-[-4rem]">
+      <div className="max-w-3xl mx-auto text-center">
+        {/* Main heading */}
+        <h1 className="heading-xl text-gradient-warm mb-8">
+          I&apos;m easy, but...
+        </h1>
+
+        {/* Rotating excuses */}
+        <div className="mb-8">
+          <p className="body-lg text-neutral-600 min-h-[2rem] transition-all duration-500 italic">
+            &ldquo;{excuses[currentExcuseIndex]}&rdquo;
           </p>
         </div>
-        <p className="text-lg">
+
+        {/* Description */}
+        <p className="body-lg text-neutral-700 mb-10 max-w-xl mx-auto">
           A collaborative restaurant choosing app for picky eaters.
         </p>
 
-        <Link
-          href="/start"
-          className="bg-blue-500 text-white px-4 py-2 rounded"
-        >
-          Jump in
+        {/* CTA Button */}
+        <Link href="/start" className="btn-primary inline-block">
+          Jump in →
         </Link>
-      </main>
+      </div>
     </div>
   );
 }

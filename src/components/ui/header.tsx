@@ -10,12 +10,14 @@ function Header({ className, ...props }: HeaderProps) {
   return (
     <header
       className={cn(
-        "flex items-center justify-between w-full h-16 px-4 bg-gray-800 text-white",
+        "flex items-center justify-between w-full h-16 px-4 mb-8 bg-neutral-200",
         className
       )}
       {...props}
     >
-      Picky Picky
+      <h1 className="text-gradient-warm heading-md font-bold">
+        I&apos;m Easy, but...
+      </h1>
     </header>
   );
 }

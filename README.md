@@ -1,4 +1,4 @@
-# Picky Picky
+# I'm Easy, but...
 
 Collaboratively choose a restaurant with friends in real-time.
 

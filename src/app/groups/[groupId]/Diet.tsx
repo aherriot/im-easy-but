@@ -2,6 +2,8 @@ import Link from "next/link";
 import { DIETS } from "@/utils/constants";
 import toggleRestriction from "../toggleRestriction";
 import { GroupQueryRestrictions, PersonalRestriction } from "@/types";
+import { CheckboxListItem } from "@/components/ui/checkbox-list-item";
+import { Button } from "@/components/ui/button";
 
 type CuisineProps = {
   guestId: string;
@@ -31,36 +33,47 @@ export default function Cuisine({
   });
 
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <h2 className="text-2xl font-bold">Choose a Diet</h2>
-        {DIETS.map((diet) => {
-          const restriction = cuisineIds.get(diet.id);
-          return (
-            <div key={diet.id} className="flex items-center gap-2">
-              <input
-                type="checkbox"
+    <div className="p-6 md:p-8">
+      <div className="max-w-2xl mx-auto">
+        <div className="mb-8">
+          <h2 className="heading-lg text-neutral-900 mb-2">Choose a Diet</h2>
+          <p className="body text-neutral-600">
+            Select any dietary preferences or restrictions
+          </p>
+        </div>
+
+        {/* Checkbox list with no gaps */}
+        <div className="bg-black shadow-md mb-8">
+          {DIETS.map((diet) => {
+            const restriction = cuisineIds.get(diet.id);
+            return (
+              <CheckboxListItem
+                key={diet.id}
                 id={diet.id}
-                name={diet.name}
-                value={diet.id}
+                label={diet.name}
                 checked={!!restriction}
-                onChange={(e) => {
+                onChange={(isChecked) => {
                   toggleRestriction({
                     groupId,
                     guestId,
                     restrictionType: "diet",
                     restrictionId: restriction?.restrictionId ?? "",
-                    referenceId: e.target.value,
-                    isChecked: e.target.checked,
+                    referenceId: diet.id,
+                    isChecked,
                   });
                 }}
               />
-              <label htmlFor={diet.id}>{diet.name}</label>
-            </div>
-          );
-        })}
-        <Link href={`/groups/${groupId}/results`}>See results</Link>
-      </main>
+            );
+          })}
+        </div>
+        <div className="w-full flex justify-center">
+          <Link href={`/groups/${groupId}/results`}>
+            <Button variant="primary" size="lg">
+              See Results
+            </Button>
+          </Link>
+        </div>
+      </div>
     </div>
   );
 }

@@ -10,6 +10,7 @@ import Cuisine from "./Cuisine";
 import Diet from "./Diet";
 import Price from "./Price";
 import db from "@/utils/db";
+import Header from "@/components/ui/header";
 
 export default function Groups({
   params,
@@ -35,7 +36,12 @@ export default function Groups({
   });
 
   if (!guestId) {
-    return <div>No guestId found</div>;
+    return (
+      <div className="min-h-screen bg-neutral-50">
+        <Header />
+        Loading
+      </div>
+    );
   }
 
   if (isLoading) return <div>Fetching data...</div>;
@@ -69,43 +75,44 @@ export default function Groups({
   // }, [guestId, publishPresence]);
 
   return (
-    <div className="min-h-screen max-w-2xl m-auto p-8 gap-16font-[family-name:var(--font-geist-sans)]">
-      <h1 className="text-4xl font-bold text-gray-500">
-        Choose a restaurant with{" "}
-        <span className="text-black">{group.name}</span> in{" "}
-        <span className="text-black">
-          {geo.city}, {geo.region}
-        </span>
-      </h1>
+    <div className="min-h-screen bg-neutral-50">
+      <Header />
+      <div className="max-w-3xl mx-auto flex flex-col gap-8">
+        {screen === "name" && (
+          <Name
+            setScreen={setScreen}
+            name={name}
+            setName={setName}
+            groupName={group.name}
+            geoName={`${geo.city}, ${geo.region}`}
+          />
+        )}
+        {screen === "cuisine" && (
+          <Cuisine
+            setScreen={setScreen}
+            guestId={guestId}
+            groupId={groupId}
+            restrictions={group.restrictions}
+          />
+        )}
 
-      {screen === "name" && (
-        <Name setScreen={setScreen} name={name} setName={setName} />
-      )}
-      {screen === "cuisine" && (
-        <Cuisine
-          setScreen={setScreen}
-          guestId={guestId}
-          groupId={groupId}
-          restrictions={group.restrictions}
-        />
-      )}
+        {screen === "diet" && (
+          <Diet
+            guestId={guestId}
+            groupId={groupId}
+            restrictions={group.restrictions}
+          />
+        )}
 
-      {screen === "diet" && (
-        <Diet
-          guestId={guestId}
-          groupId={groupId}
-          restrictions={group.restrictions}
-        />
-      )}
-
-      {screen === "price" && (
-        <Price
-          setScreen={setScreen}
-          guestId={guestId}
-          groupId={groupId}
-          restrictions={group.restrictions}
-        />
-      )}
+        {screen === "price" && (
+          <Price
+            setScreen={setScreen}
+            guestId={guestId}
+            groupId={groupId}
+            restrictions={group.restrictions}
+          />
+        )}
+      </div>
     </div>
   );
 }

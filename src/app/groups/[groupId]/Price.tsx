@@ -2,6 +2,8 @@ import Link from "next/link";
 import { PRICES } from "@/utils/constants";
 import toggleRestriction from "../toggleRestriction";
 import { GroupQueryRestrictions, PersonalRestriction, Screen } from "@/types";
+import { CheckboxListItem } from "@/components/ui/checkbox-list-item";
+import { Button } from "@/components/ui/button";
 
 type CuisineProps = {
   guestId: string;
@@ -14,7 +16,6 @@ export default function Cuisine({
   guestId,
   groupId,
   restrictions,
-  setScreen,
 }: CuisineProps) {
   const cuisineIds = new Map<string, PersonalRestriction>();
 
@@ -33,36 +34,46 @@ export default function Cuisine({
   });
 
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <h2 className="text-2xl font-bold">Choose a Restriction</h2>
-        {PRICES.map((price) => {
-          const restriction = cuisineIds.get(price.id);
-          return (
-            <div key={price.id} className="flex items-center gap-2">
-              <input
-                type="checkbox"
+    <div className="min-h-screen bg-neutral-50 p-6 md:p-8">
+      <div className="max-w-2xl mx-auto">
+        <div className="mb-8">
+          <h2 className="heading-lg text-neutral-900 mb-2">Price Range</h2>
+          <p className="body text-neutral-600">
+            Select price ranges you want to avoid
+          </p>
+        </div>
+
+        {/* Checkbox list with no gaps */}
+        <div className="bg-white rounded-lg shadow-md overflow-hidden mb-8">
+          {PRICES.map((price) => {
+            const restriction = cuisineIds.get(price.id);
+            return (
+              <CheckboxListItem
+                key={price.id}
                 id={price.id}
-                name={price.name}
-                value={price.id}
+                label={price.name}
                 checked={!!restriction}
-                onChange={(e) => {
+                onChange={(isChecked) => {
                   toggleRestriction({
                     groupId,
                     guestId,
-                    restrictionType: "cuisine",
+                    restrictionType: "price",
                     restrictionId: restriction?.restrictionId ?? "",
-                    referenceId: e.target.value,
-                    isChecked: e.target.checked,
+                    referenceId: price.id,
+                    isChecked,
                   });
                 }}
               />
-              <label htmlFor={price.id}>{price.name}</label>
-            </div>
-          );
-        })}
-        <Link href={`/groups/${groupId}/results`}>See results</Link>
-      </main>
+            );
+          })}
+        </div>
+
+        <Link href={`/groups/${groupId}/results`}>
+          <Button variant="primary" size="lg">
+            See Results
+          </Button>
+        </Link>
+      </div>
     </div>
   );
 }

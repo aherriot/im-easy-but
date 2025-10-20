@@ -14,7 +14,7 @@ export default function Start() {
   const [name, setName] = useLocalStorageState<string>("name", "");
 
   return (
-    <div className="min-h-screen max-w-2xl m-auto p-8 gap-16font-[family-name:var(--font-geist-sans)]">
+    <div className="min-h-screen max-w-2xl m-auto p-8 bg-neutral-50">
       {screen === "start" && (
         <Name setScreen={setScreen} name={name} setName={setName} />
       )}

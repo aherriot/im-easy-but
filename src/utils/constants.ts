@@ -1,5 +1,5 @@
 export const CUISINES = [
-  { name: "Asian", id: "10659" },
+  // { name: "Asian", id: "10659" },
   { name: "Italian", id: "4617" },
   { name: "Mediterranean", id: "10649" },
   { name: "Chinese", id: "5379" },
@@ -26,7 +26,7 @@ export const CUISINES = [
 export const DIETS = [
   { name: "Vegetarian", id: "10665" },
   { name: "Vegan", id: "10697" },
-  { name: "Gluten Free", id: "10992" },
+  // { name: "Gluten Free", id: "10992" },
   { name: "Halal", id: "10751" },
   { name: "Kosher", id: "10768" },
   // { name: "Dairy Free", id: "" },
