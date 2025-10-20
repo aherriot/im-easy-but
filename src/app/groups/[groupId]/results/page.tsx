@@ -83,7 +83,7 @@ export default function Group({
 
   return (
     <div className="items-center text-white justify-items-center min-h-screen gap-16  bg-neutral-50">
-      <Header />
+      <Header showInvite />
       <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
         <h1 className="text-4xl font-bold">Results</h1>
 

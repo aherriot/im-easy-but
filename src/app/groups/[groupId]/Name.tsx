@@ -18,9 +18,12 @@ export default function Name({
   setName,
 }: NameProps) {
   return (
-    <main className="flex flex-col gap-4 items-center sm:items-start">
-      <h1 className="text-4xl font-bold text-gray-500">
-        Choose a restaurant with <span className="text-white">{groupName}</span>{" "}
+    <main className="flex flex-col gap-4 items-center justify-center">
+      <h1 className="text-4xl font-bold text-gray-500 px-4 text-center max-w-2xl">
+        Choose a restaurant
+        <br />
+        with <span className="text-white">{groupName}</span>
+        <br />
         in <span className="text-white">{geoName}</span>
       </h1>
       <Input

@@ -38,7 +38,7 @@ export default function Groups({
   if (!guestId) {
     return (
       <div className="min-h-screen bg-neutral-50">
-        <Header />
+        <Header showInvite />
         Loading
       </div>
     );
@@ -76,7 +76,7 @@ export default function Groups({
 
   return (
     <div className="min-h-screen bg-neutral-50">
-      <Header />
+      <Header showInvite />
       <div className="max-w-3xl mx-auto flex flex-col gap-8">
         {screen === "name" && (
           <Name
