@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { DIETS } from "@/utils/constants";
 import toggleRestriction from "../toggleRestriction";
-import { GroupQueryRestrictions, PersonalRestriction } from "@/types";
+import { GroupQueryRestrictions, PersonalRestriction, Screen } from "@/types";
 import { CheckboxListItem } from "@/components/ui/checkbox-list-item";
 import { Button } from "@/components/ui/button";
 
@@ -9,12 +9,14 @@ type CuisineProps = {
   guestId: string;
   groupId: string;
   restrictions: GroupQueryRestrictions;
+  setScreen: (screen: Screen) => void;
 };
 
 export default function Cuisine({
   guestId,
   groupId,
   restrictions,
+  setScreen,
 }: CuisineProps) {
   const cuisineIds = new Map<string, PersonalRestriction>();
 
@@ -48,6 +50,7 @@ export default function Cuisine({
             const restriction = cuisineIds.get(diet.id);
             return (
               <CheckboxListItem
+                positive
                 key={diet.id}
                 id={diet.id}
                 label={diet.name}
@@ -66,7 +69,14 @@ export default function Cuisine({
             );
           })}
         </div>
-        <div className="w-full flex justify-center">
+        <div className="w-full flex justify-center gap-3">
+          <Button
+            variant="outline"
+            onClick={() => setScreen("cuisine")}
+            size="lg"
+          >
+            Back
+          </Button>
           <Link href={`/groups/${groupId}/results`}>
             <Button variant="primary" size="lg">
               See Results

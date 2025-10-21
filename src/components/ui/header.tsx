@@ -30,7 +30,7 @@ function Header({ className, showInvite, ...props }: HeaderProps) {
         </button>
       )}
       {showInvite && showingInviteQR && (
-        <div className="fixed inset-4 p-4 bg-black border border-neutral-300 shadow-lg flex flex-col items-center justify-center z-10">
+        <div className="fixed inset-4 p-4 bg-black border border-neutral-300 shadow-lg flex flex-col items-center justify-center z-10 max-w-2xl m-auto">
           <h1 className="text-gradient-warm heading-lg font-bold text-center mb-4">
             I&apos;m Easy, but...
           </h1>

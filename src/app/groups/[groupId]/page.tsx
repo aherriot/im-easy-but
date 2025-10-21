@@ -98,6 +98,7 @@ export default function Groups({
 
         {screen === "diet" && (
           <Diet
+            setScreen={setScreen}
             guestId={guestId}
             groupId={groupId}
             restrictions={group.restrictions}

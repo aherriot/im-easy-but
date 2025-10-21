@@ -7,20 +7,24 @@ export interface CheckboxListItemProps {
   checked: boolean;
   onChange: (checked: boolean) => void;
   className?: string;
+  /**
+   * When true, shows a positive affirmative style (highlighted when checked).
+   * When false (default), shows a negative crossing-off style (strikethrough when checked).
+   */
+  positive?: boolean;
 }
 
 const CheckboxListItem = React.forwardRef<
   HTMLLabelElement,
   CheckboxListItemProps
->(({ id, label, checked, onChange, className }, ref) => {
+>(({ id, label, checked, onChange, className, positive = false }, ref) => {
   return (
     <label
       ref={ref}
       htmlFor={id}
       className={cn(
         "relative flex items-center w-full px-6 py-4 cursor-pointer transition-all duration-200",
-        "border-b border-neutral-200",
-        "hover:bg-primary-50",
+        "border-b border-neutral-200 hover:bg-primary-500/10",
         "active:bg-primary-100",
         "group",
         className
@@ -41,7 +45,9 @@ const CheckboxListItem = React.forwardRef<
           "flex-shrink-0 w-6 h-6 rounded border-2 transition-all duration-200 mr-4",
           "flex items-center justify-center",
           checked
-            ? "bg-primary-500 border-primary-500"
+            ? positive
+              ? "bg-secondary-500 border-secondary-500"
+              : "bg-primary-500 border-primary-500"
             : "bg-white border-neutral-300 group-hover:border-primary-400"
         )}
       >
@@ -61,19 +67,23 @@ const CheckboxListItem = React.forwardRef<
         )}
       </div>
 
-      {/* Label with strikethrough */}
+      {/* Label with conditional styling */}
       <span
         className={cn(
           "relative text-base font-medium transition-all duration-200 select-none",
-          checked
-            ? "text-neutral-400"
-            : "text-neutral-900 group-hover:text-primary-600"
+          positive
+            ? checked
+              ? "text-secondary-700 font-semibold"
+              : "text-neutral-900 group-hover:text-primary-600"
+            : checked
+              ? "text-neutral-400"
+              : "text-neutral-900 group-hover:text-primary-600"
         )}
       >
         {label}
 
-        {/* Strikethrough line */}
-        {checked && (
+        {/* Strikethrough line - only shown in negative mode */}
+        {!positive && checked && (
           <span
             className="absolute inset-0 flex items-center"
             aria-hidden="true"
@@ -82,14 +92,6 @@ const CheckboxListItem = React.forwardRef<
           </span>
         )}
       </span>
-
-      {/* Ripple effect on hover */}
-      <div
-        className={cn(
-          "absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none",
-          "bg-gradient-to-r from-transparent via-primary-100/30 to-transparent"
-        )}
-      />
     </label>
   );
 });
