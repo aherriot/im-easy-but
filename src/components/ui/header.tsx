@@ -19,7 +19,7 @@ function Header({ className, showInvite, ...props }: HeaderProps) {
       {...props}
     >
       <h1 className="text-gradient-warm heading-md font-bold">
-        I&apos;m Easy, but...
+        I&apos;m easy, but...
       </h1>
       {showInvite && (
         <button
@@ -32,7 +32,7 @@ function Header({ className, showInvite, ...props }: HeaderProps) {
       {showInvite && showingInviteQR && (
         <div className="fixed inset-4 p-4 bg-black border border-neutral-300 shadow-lg flex flex-col items-center justify-center z-10 max-w-2xl m-auto">
           <h1 className="text-gradient-warm heading-lg font-bold text-center mb-4">
-            I&apos;m Easy, but...
+            I&apos;m easy, but...
           </h1>
           <div className="bg-white w-full p-4">
             <QRCode
@@ -43,7 +43,7 @@ function Header({ className, showInvite, ...props }: HeaderProps) {
             />
           </div>
           <p className="text-center mt-4 font-semibold text-lg text-neutral-600">
-            Help me pick a restaurant
+            Collaboratively choose a restaurant
           </p>
           <button
             className="btn-primary mt-6"

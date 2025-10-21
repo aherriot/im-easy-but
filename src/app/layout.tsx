@@ -13,7 +13,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "I'm Easy, but...",
+  title: "I'm easy, but...",
   description: "Collective Restaurant Decision Making",
 };
 

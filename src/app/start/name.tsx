@@ -11,7 +11,7 @@ export default function Name({ setScreen, name, setName }: NameProps) {
   return (
     <main className="flex flex-col gap-4 items-center sm:items-start">
       <h1 className="text-4xl text-gradient-warm font-bold">
-        I&apos;m Easy, but...
+        I&apos;m easy, but...
       </h1>
       <Input
         label="What is your name?"

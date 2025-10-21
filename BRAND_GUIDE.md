@@ -1,8 +1,8 @@
-# I'm Easy, but... - Brand Guide
+# I'm easy, but... - Brand Guide
 
 ## Overview
 
-I'm Easy, but... is a fun, collaborative restaurant selection app that brings people together through food. The brand identity reflects warmth, friendliness, and the joy of shared dining experiences.
+I'm easy, but... is a fun, collaborative restaurant selection app that brings people together through food. The brand identity reflects warmth, friendliness, and the joy of shared dining experiences.
 
 ## Color Palette
 
@@ -179,7 +179,7 @@ Use **Accent Purple** for:
 <h1
   class="bg-gradient-to-r from-primary-500 to-primary-600 bg-clip-text text-transparent"
 >
-  I'm Easy, but...
+  I'm easy, but...
 </h1>
 ```
 
